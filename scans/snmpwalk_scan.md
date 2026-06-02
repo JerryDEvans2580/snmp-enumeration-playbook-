@@ -94,8 +94,6 @@ This information helped map the internal network configuration.
 
 ## TCP Listener Enumeration
 
-Relevant OID:
-
 ```text
 Relevant OID:
 1.3.6.1.2.1.6.13
