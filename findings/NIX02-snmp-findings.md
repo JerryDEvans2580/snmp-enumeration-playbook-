@@ -1,8 +1,14 @@
-# NIX02 - SNMP Information Disclosure
+# Finding: SNMP Information Disclosure via Default Community String
 
-## Finding Summary
+## Finding ID
 
-The target exposed SNMPv2c using the default community string `public`, allowing unauthenticated access to sensitive system and network information.
+SNMP-001
+
+---
+
+## Title
+
+SNMPv2c Information Disclosure Through Default Community String
 
 ---
 
@@ -12,9 +18,33 @@ Medium
 
 ---
 
-## Service Information
+## CVSS v3.1
 
-| Field            | Value   |
+### Vector
+
+```text
+CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N
+```
+
+### Base Score
+
+5.3
+
+---
+
+## Description
+
+The target exposes SNMPv2c on UDP port 161 and accepts requests using the default community string `public`.
+
+Successful authentication using this community string allowed retrieval of system, network, and service information without requiring valid user credentials.
+
+SNMPv2c does not provide encryption or strong authentication mechanisms. As a result, sensitive management information becomes accessible to unauthenticated users.
+
+---
+
+## Affected Service
+
+| Property         | Value   |
 | ---------------- | ------- |
 | Service          | SNMP    |
 | Protocol         | UDP     |
@@ -24,17 +54,15 @@ Medium
 
 ---
 
-## Discovery
+## Discovery Method
 
-SNMP was identified during network enumeration.
-
-The service accepted requests using the default community string `public`.
-
-Enumeration was performed using:
+### Initial Enumeration
 
 ```bash
 snmpwalk -v2c -c public <TARGET IP>
 ```
+
+The target responded with management information immediately, confirming that the community string was valid.
 
 ---
 
@@ -43,11 +71,13 @@ snmpwalk -v2c -c public <TARGET IP>
 ### Host Information
 
 ```text
-Hostname: NIX02
+Linux NIX02 5.4.0-90-generic
 ```
 
+### Hostname
+
 ```text
-Linux NIX02 5.4.0-90-generic
+NIX02
 ```
 
 ### Administrative Contact
@@ -56,7 +86,7 @@ Linux NIX02 5.4.0-90-generic
 devadmin@inlanefreight.htb
 ```
 
-### Custom Description
+### Description
 
 ```text
 InFreight SNMP v0.91
@@ -64,15 +94,27 @@ InFreight SNMP v0.91
 
 ---
 
-## Network Information Disclosed
+## Network Information Disclosure
 
-The SNMP service exposed:
+SNMP exposed network-related information including:
 
-* Internal IP addresses
-* Network interfaces
-* Routing information
-* ARP information
-* Interface statistics
+### Local Address
+
+```text
+<TARGET IP>
+```
+
+### Loopback Address
+
+```text
+127.0.0.1
+```
+
+### Default Gateway
+
+```text
+<TARGET IP>
+```
 
 ### Network Interfaces
 
@@ -81,24 +123,11 @@ lo
 VMware VMXNET3 Ethernet Controller
 ```
 
-### IP Addresses
-
-```text
-<TARGET IP>
-127.0.0.1
-```
-
-### Gateway
-
-```text
-<TARGET IP>
-```
-
 ---
 
-## Service Enumeration via SNMP
+## Service Enumeration Disclosure
 
-The TCP listener table exposed active services.
+The TCP listener table exposed active services running on the host.
 
 ### Discovered Services
 
@@ -115,49 +144,80 @@ The TCP listener table exposed active services.
 
 ---
 
-## Impact
+## Security Impact
 
-An attacker can use this information to:
+An attacker can use the disclosed information to:
 
-* Enumerate usernames
 * Identify operating systems
 * Determine kernel versions
-* Discover internal network architecture
+* Discover usernames
+* Enumerate administrative contacts
+* Map internal network architecture
 * Identify exposed services
-* Research vulnerabilities
-* Plan further attacks
+* Prioritize vulnerability research
+* Improve attack planning
 
-Although SNMP itself did not provide direct code execution, it significantly improved visibility into the target environment.
+Although the vulnerability does not directly allow code execution, it significantly increases visibility into the target environment.
 
 ---
 
-## Risk Analysis
+## Exploitation Scenario
 
-The primary issue is the exposure of SNMPv2c using a publicly known community string.
+An unauthenticated attacker discovers UDP port 161 exposed on the network.
 
-SNMPv2c does not provide:
+Using the default community string `public`, the attacker retrieves system information, administrative contact details, internal addressing information, and active service data.
 
-* Encryption
-* Strong authentication
-* Granular access control
+The attacker then uses this intelligence to perform focused enumeration and vulnerability assessment against the discovered services.
 
-As a result, sensitive management information becomes available to unauthenticated users.
+---
+
+## Root Cause
+
+The issue is caused by:
+
+* Use of SNMPv2c
+* Use of the default community string `public`
+* Excessive exposure of management information
 
 ---
 
 ## Recommendations
 
-1. Disable SNMP if not required.
-2. Remove default community strings.
-3. Restrict SNMP access using ACLs.
-4. Migrate to SNMPv3.
-5. Enable authentication and encryption.
-6. Limit exposed MIB views to only necessary data.
+### Disable SNMP
+
+Disable the service if it is not required.
+
+### Restrict Access
+
+Allow SNMP access only from trusted management hosts.
+
+### Replace Default Community Strings
+
+Avoid using:
+
+```text
+public
+private
+```
+
+Use long, randomly generated community strings.
+
+### Upgrade to SNMPv3
+
+Use SNMPv3 to provide:
+
+* Authentication
+* Encryption
+* Access control
+
+### Limit Exposed MIB Data
+
+Restrict accessible OID trees to only required management information.
 
 ---
 
 ## Conclusion
 
-SNMP enumeration successfully revealed valuable reconnaissance information including host details, contact information, network configuration, and active services.
+SNMP enumeration successfully disclosed sensitive host, network, and service information using the default community string `public`.
 
-The exposed data could be leveraged to support additional enumeration, service-specific attacks, and vulnerability research during a penetration test.
+The information obtained significantly improved reconnaissance capabilities and provided valuable intelligence for further assessment activities.
