@@ -13,7 +13,7 @@ The objective was to identify information disclosure vulnerabilities and enumera
 The initial enumeration was performed using:
 
 ```bash
-snmpwalk -v2c -c public 10.129.5.110
+snmpwalk -v2c -c public <TARGET IP>
 ```
 
 The target responded successfully, confirming that the community string `public` was valid and that SNMP information could be retrieved without authentication.
@@ -41,12 +41,12 @@ Discovered network interfaces:
 
 Discovered IP addresses:
 
-* 10.129.5.110
+* <TARGET IP>
 * 127.0.0.1
 
 Discovered gateway:
 
-* 10.129.0.1
+* <TARGET IP>
 
 ### Exposed Services
 
