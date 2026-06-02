@@ -4,7 +4,7 @@
 
 This repository documents a practical SNMP enumeration workflow against a Linux target exposing SNMPv2c with the default community string `public`.
 
-The objective was to identify information disclosure vulnerabilities and enumerate services, host information, and network details through SNMP.
+The objective was to assess the information disclosure risks associated with exposed SNMPv2c services and identify data that could support further attack surface analysis.
 
 ---
 
