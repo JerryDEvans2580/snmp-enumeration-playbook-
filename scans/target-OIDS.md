@@ -15,6 +15,14 @@ Rather than reviewing the entire SNMP tree repeatedly, specific OIDs can be quer
 ```text
 1.3.6.1.2.1.1
 ```
+Why It Matters
+
+System information can assist with:
+
+- OS fingerprinting
+- Kernel vulnerability research
+- Host identification
+- Infrastructure mapping
 
 ## Command
 
