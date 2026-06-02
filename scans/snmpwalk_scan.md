@@ -156,6 +156,6 @@ SNMP enumeration successfully exposed significant reconnaissance data including:
 * Network configuration
 * Active services
 
-The information gathered during this phase provided a clear understanding of the target environment and supported further service-specific enumeration.
+The information gathered during this phase significantly improved visibility into the target environment and enabled focused follow-up enumeration against identified services such as SSH, SMTP, IMAP, POP3, and MySQL.
 
 
