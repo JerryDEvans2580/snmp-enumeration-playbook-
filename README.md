@@ -8,6 +8,16 @@ The objective was to assess the information disclosure risks associated with exp
 
 ---
 
+## Enumeration Workflow
+
+1. Validate SNMP access
+2. Perform broad SNMP enumeration
+3. Identify valuable host information
+4. Enumerate network information
+5. Identify active services
+6. Map the attack surface
+7. Plan follow-up enumeration
+
 ## Initial Enumeration
 
 The initial enumeration was performed using:
