@@ -101,3 +101,24 @@ This information can be used to support:
 SNMP enumeration is not simply collecting large amounts of output.
 
 The primary goal is to identify valuable intelligence that can support later phases of an assessment, including service discovery, user enumeration, and vulnerability research.
+
+## Next Steps
+
+Based on the discovered services:
+
+### SSH
+- Version identification
+- Authentication testing
+
+### SMTP
+- VRFY
+- EXPN
+- User enumeration
+
+### IMAP / POP3
+- Capability enumeration
+- Authentication testing
+
+### MySQL
+- Version detection
+- Access validation
