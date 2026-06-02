@@ -134,7 +134,7 @@ This information can be used to support:
 
 SNMP enumeration is not simply collecting large amounts of output.
 
-The primary goal is to identify valuable intelligence that can support later phases of an assessment, including service discovery, user enumeration, and vulnerability research.
+The primary goal of enumeration is not to collect the largest amount of data, but to identify intelligence that supports future attack paths, service-specific enumeration, and vulnerability research.
 
 ## Why SNMP Matters
 
