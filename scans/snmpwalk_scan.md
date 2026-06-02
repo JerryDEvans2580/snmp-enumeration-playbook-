@@ -92,14 +92,17 @@ This information helped map the internal network configuration.
 
 ---
 
-## Service Enumeration Through SNMP
-
-The TCP listener table exposed active services running on the target.
+## TCP Listener Enumeration
 
 Relevant OID:
 
 ```text
+Relevant OID:
 1.3.6.1.2.1.6.13
+```
+
+```bash
+snmpwalk -v2c -c public <TARGET IP> 1.3.6.1.2.1.6.13
 ```
 
 Discovered listening services:
