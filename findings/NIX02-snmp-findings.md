@@ -33,7 +33,7 @@ The service accepted requests using the default community string `public`.
 Enumeration was performed using:
 
 ```bash
-snmpwalk -v2c -c public 10.129.5.110
+snmpwalk -v2c -c public <TARGET IP>
 ```
 
 ---
@@ -84,14 +84,14 @@ VMware VMXNET3 Ethernet Controller
 ### IP Addresses
 
 ```text
-10.129.5.110
+<TARGET IP>
 127.0.0.1
 ```
 
 ### Gateway
 
 ```text
-10.129.0.1
+<TARGET IP>
 ```
 
 ---
